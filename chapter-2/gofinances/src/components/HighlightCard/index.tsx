@@ -1,42 +1,41 @@
-import React from 'react';
+import React from 'react'
 
-import * as S from './style'
+import * as S from './styles'
 
 export type HighlightCardProps = {
-  cardType: 'up' | 'down' | 'total';
-  titlle: string;
-  amount: string;
-  lastTransaction: string;
+  cardType: 'movements' | 'total'
+  iconType: 'up' | 'down' | 'total'
+  titlle: string
+  amount: string
+  lastTransaction: string
 }
 
 const icon = {
   up: 'arrow-up-circle',
   down: 'arrow-down-circle',
-  total: 'dollar-sign',
+  total: 'dollar-sign'
 }
 
-export const HighlightCard = ({ titlle, amount, lastTransaction, cardType }: HighlightCardProps) => {
+export const HighlightCard = ({
+  titlle,
+  amount,
+  lastTransaction,
+  cardType,
+  iconType
+}: HighlightCardProps) => {
   return (
     <S.Container cardType={cardType}>
       <S.Header>
-        <S.Title cardType={cardType}>
-          {titlle}
-        </S.Title>
-        <S.Icon
-          name={icon[cardType]}
-          cardType={cardType}
-        />
+        <S.Title cardType={cardType}>{titlle}</S.Title>
+        <S.Icon name={icon[iconType]} iconType={iconType} />
       </S.Header>
 
       <S.Footer>
-        <S.Amount cardType={cardType}>
-          {amount}
-        </S.Amount>
+        <S.Amount cardType={cardType}>{amount}</S.Amount>
         <S.LastTransaction cardType={cardType}>
-          {lastTransaction}</S.LastTransaction>
+          {lastTransaction}
+        </S.LastTransaction>
       </S.Footer>
     </S.Container>
-  );
+  )
 }
-
-

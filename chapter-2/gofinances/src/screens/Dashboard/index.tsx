@@ -1,16 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-import { HighlightCard } from '../../components/HighlightCard';
-import { TransactionCard, TransactionDataProps } from '../../components/TransactionCard';
+import { HighlightCard } from '../../components/HighlightCard'
+import {
+  TransactionCard,
+  TransactionDataProps
+} from '../../components/TransactionCard'
 
 export type DataListProps = {
   id: string
-} & TransactionDataProps;
+} & TransactionDataProps
 
 import * as S from './styles'
 
 export const Dashboard = () => {
-
   const data: DataListProps[] = [
     {
       id: '1',
@@ -44,8 +46,7 @@ export const Dashboard = () => {
         icon: 'coffee'
       },
       date: '03/04/2021'
-    },
-
+    }
   ]
 
   return (
@@ -54,35 +55,40 @@ export const Dashboard = () => {
         <S.UserWrapper>
           <S.UserInfo>
             <S.Photo
-              source={{ uri: 'https://avatars.githubusercontent.com/u/15898709?v=4' }}
+              source={{
+                uri: 'https://avatars.githubusercontent.com/u/15898709?v=4'
+              }}
             />
             <S.User>
               <S.UserGreeting>Olá,</S.UserGreeting>
               <S.UserName>Morpa</S.UserName>
             </S.User>
           </S.UserInfo>
-          <S.Icon name='power' />
+          <S.Icon name="power" />
         </S.UserWrapper>
       </S.Header>
 
       <S.HighlightCards>
         <HighlightCard
-          cardType='up'
-          titlle='Entradas'
-          amount='R$ 17.400,00'
-          lastTransaction='Última entrada dia 13 de abril'
+          cardType="movements"
+          iconType="up"
+          titlle="Entradas"
+          amount="R$ 17.400,00"
+          lastTransaction="Última entrada dia 13 de abril"
         />
         <HighlightCard
-          cardType='down'
-          titlle='Saídas'
-          amount='R$ 1.259,00'
-          lastTransaction='Última saída dia 03 de abril'
+          cardType="movements"
+          iconType="down"
+          titlle="Saídas"
+          amount="R$ 1.259,00"
+          lastTransaction="Última saída dia 03 de abril"
         />
         <HighlightCard
-          cardType='total'
-          titlle='Total'
-          amount='R$ 16.141,00'
-          lastTransaction='01 à 16 de abril'
+          cardType="total"
+          iconType="total"
+          titlle="Total"
+          amount="R$ 16.141,00"
+          lastTransaction="01 à 16 de abril"
         />
       </S.HighlightCards>
 
@@ -91,12 +97,10 @@ export const Dashboard = () => {
 
         <S.TransactionsList
           data={data}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => <TransactionCard data={item} />}
         />
       </S.Transactions>
     </S.Container>
-  );
+  )
 }
-
-

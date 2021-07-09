@@ -1,22 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import * as S from './style';
+import * as S from './styles'
 
 type Category = {
-  name: string;
-  icon: string;
+  name: string
+  icon: string
 }
 
 export type TransactionDataProps = {
-  amountType: 'positive' | 'negative';
-  title: string;
-  amount: string;
-  category: Category;
-  date: string;
+  amountType: 'positive' | 'negative'
+  title: string
+  amount: string
+  category: Category
+  date: string
 }
 
 type TransactionCardProps = {
-  data: TransactionDataProps;
+  data: TransactionDataProps
 }
 
 export const TransactionCard = ({ data }: TransactionCardProps) => {
@@ -36,7 +36,5 @@ export const TransactionCard = ({ data }: TransactionCardProps) => {
         <S.Date>{data.date}</S.Date>
       </S.Footer>
     </S.Container>
-  );
+  )
 }
-
-
