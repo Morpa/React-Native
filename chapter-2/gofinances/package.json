@@ -3,9 +3,11 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "generate": "yarn plop --plopfile generators/plopfile.js",
     "web": "expo start --web",
     "start": "react-native start",
     "test": "jest",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -29,17 +31,18 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "eslint": "^7.29.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
     "@react-native-community/eslint-config": "^3.0.0",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
     "@types/styled-components-react-native": "^5.1.1",
     "babel-preset-expo": "~8.3.0",
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "jest-expo": "~41.0.0",
+    "plop": "^2.7.4",
     "prettier": "^2.3.2",
     "typescript": "~4.0.0"
   },

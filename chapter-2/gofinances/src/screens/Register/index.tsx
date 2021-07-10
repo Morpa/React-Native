@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { TransactionTypeButton } from '../../components/TransactionTypeButton'
+import { CategorySelect } from '../../components/CategorySelect'
 
 import * as S from './styles'
 
@@ -40,6 +41,8 @@ export const Register = () => {
               title="Outcome"
             />
           </S.TransactionTypes>
+
+          <CategorySelect title="Categoria" />
         </S.Fields>
 
         <Button title="Enviar" />
