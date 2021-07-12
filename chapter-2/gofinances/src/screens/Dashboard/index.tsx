@@ -64,7 +64,10 @@ export const Dashboard = () => {
               <S.UserName>Morpa</S.UserName>
             </S.User>
           </S.UserInfo>
-          <S.Icon name="power" />
+
+          <S.LogoutButton onPress={() => { }}>
+            <S.Icon name="power" />
+          </S.LogoutButton>
         </S.UserWrapper>
       </S.Header>
 

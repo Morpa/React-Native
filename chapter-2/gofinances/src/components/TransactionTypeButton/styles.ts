@@ -1,5 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components/native'
-import { TouchableOpacity } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { Feather } from '@expo/vector-icons'
 
@@ -17,20 +17,24 @@ const containerModifiers = {
   `
 }
 
-export const Container = styled(TouchableOpacity)<
+export const Container = styled.View<
   Pick<TransactionTypeButtonProps, 'isActive' | 'buttonType'>
 >`
   ${({ theme, isActive, buttonType }) => css`
     width: 48%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
     border: 1.5px solid ${theme.colors.text};
     border-radius: 5px;
-    padding: 16px;
+
     ${isActive && buttonType === 'up' && containerModifiers.up(theme)};
     ${isActive && buttonType === 'down' && containerModifiers.down(theme)};
   `}
+`
+
+export const Button = styled(RectButton)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
 `
 
 const iconModifiers = {

@@ -1,15 +1,16 @@
 import React from 'react'
-import { TouchableOpacityProps } from 'react-native'
+import { RectButtonProps } from 'react-native-gesture-handler'
 
 import * as S from './styles'
 
-type ButtonProps = {
+interface ButtonProps extends RectButtonProps {
   title: string
-} & TouchableOpacityProps
+  onPress: () => void
+}
 
-export const Button = ({ title, ...props }: ButtonProps) => {
+export function Button({ title, onPress, ...props }: ButtonProps) {
   return (
-    <S.Container {...props}>
+    <S.Container onPress={onPress} {...props}>
       <S.Title>{title}</S.Title>
     </S.Container>
   )
