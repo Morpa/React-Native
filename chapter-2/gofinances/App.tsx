@@ -10,7 +10,6 @@ import AppLoading from 'expo-app-loading'
 
 import theme from './src/global/styles/theme'
 import { Register } from './src/screens/Register'
-import { Dashboard } from './src/screens/Dashboard'
 
 const App = () => {
   const [fontsLoaded] = useFonts({
