@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { HighlightCard } from '../../components/HighlightCard'
 import {
@@ -13,41 +15,51 @@ export type DataListProps = {
 import * as S from './styles'
 
 export const Dashboard = () => {
-  const data: DataListProps[] = [
-    {
-      id: '1',
-      amountType: 'positive',
-      title: 'Desenvolvimento de site',
-      amount: 'R$ 1.259,00',
-      category: {
-        name: 'Vendas',
-        icon: 'dollar-sign'
-      },
-      date: '03/04/2021'
-    },
-    {
-      id: '2',
-      amountType: 'negative',
-      title: 'Desenvolvimento de site',
-      amount: 'R$ 255,00',
-      category: {
-        name: 'Aluguel',
-        icon: 'home'
-      },
-      date: '03/04/2021'
-    },
-    {
-      id: '3',
-      amountType: 'negative',
-      title: 'Rango',
-      amount: 'R$ 259,00',
-      category: {
-        name: 'Alimentação',
-        icon: 'coffee'
-      },
-      date: '03/04/2021'
-    }
-  ]
+  const [data, setData] = useState<DataListProps[]>([])
+
+  const loadTransactions = async () => {
+    const dataKey = '@gofinances:transactions'
+
+    const response = await AsyncStorage.getItem(dataKey)
+
+    const transaction = response ? JSON.parse(response) : []
+
+    const transactionsFormatted: DataListProps[] = transaction.map(
+      (transaction: DataListProps) => {
+        const amount = Number(transaction.amount).toLocaleString('pt-PT', {
+          style: 'currency',
+          currency: 'EUR'
+        })
+
+        const date = Intl.DateTimeFormat('pt-PT', {
+          day: '2-digit',
+          month: '2-digit',
+          year: '2-digit'
+        }).format(new Date(transaction.date))
+
+        return {
+          id: transaction.id,
+          amountType: transaction.amountType,
+          name: transaction.name,
+          amount,
+          category: transaction.category,
+          date
+        }
+      }
+    )
+
+    setData(transactionsFormatted)
+  }
+
+  useEffect(() => {
+    loadTransactions()
+  }, [])
+
+  useFocusEffect(
+    useCallback(() => {
+      loadTransactions()
+    }, [])
+  )
 
   return (
     <S.Container>
@@ -65,7 +77,11 @@ export const Dashboard = () => {
             </S.User>
           </S.UserInfo>
 
-          <S.LogoutButton onPress={() => { }}>
+          <S.LogoutButton
+            onPress={() => {
+              console.log('object')
+            }}
+          >
             <S.Icon name="power" />
           </S.LogoutButton>
         </S.UserWrapper>
