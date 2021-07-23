@@ -12,13 +12,10 @@ import {
   Poppins_700Bold
 } from '@expo-google-fonts/poppins'
 import AppLoading from 'expo-app-loading'
-import { NavigationContainer } from '@react-navigation/native'
 
+import { Routes } from './src/routes'
 import theme from './src/global/styles/theme'
-import { AppRoutes } from './src/routes/app.routes'
 import { AuthProvider } from './src/hooks/use-auth'
-
-import { SignIn } from './src/screens/SignIn'
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -33,12 +30,10 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <StatusBar barStyle="light-content" />
-        <AuthProvider>
-          <SignIn />
-        </AuthProvider>
-      </NavigationContainer>
+      <StatusBar barStyle="light-content" />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </ThemeProvider>
   )
 }
