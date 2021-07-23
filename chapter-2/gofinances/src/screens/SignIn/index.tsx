@@ -12,7 +12,7 @@ import LogoSVG from '../../assets/logo.svg'
 import * as S from './styles'
 
 export const SignIn = () => {
-  const { signInWithGoogle } = useAuth()
+  const { signInWithGoogle, signInWithApple } = useAuth()
 
   const handleSignInWithGoogle = () => {
     try {
@@ -20,6 +20,15 @@ export const SignIn = () => {
     } catch (error) {
       console.error(error)
       Alert.alert('Não foi possível conectar com o Google')
+    }
+  }
+
+  const handleSignInWithApple = () => {
+    try {
+      signInWithApple()
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Não foi possível conectar a conta Apple')
     }
   }
 
@@ -45,7 +54,11 @@ export const SignIn = () => {
             svg={GoogleSVG}
             onPress={handleSignInWithGoogle}
           />
-          <SocialButton title="Entrar com Apple" svg={AppleSVG} />
+          <SocialButton
+            title="Entrar com Apple"
+            svg={AppleSVG}
+            onPress={handleSignInWithApple}
+          />
         </S.FooterWrapper>
       </S.Footer>
     </S.Container>
