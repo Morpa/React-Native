@@ -17,6 +17,8 @@ type AuthContextData = {
   user: UserProps
   signInWithGoogle: () => void
   signInWithApple: () => void
+  signOut: () => void
+  userStorageLoading: boolean
 }
 
 type AuthorizationResponse = {
@@ -34,7 +36,9 @@ const AuthContextDefaultValues = {
     photo: ''
   },
   signInWithGoogle: () => null,
-  signInWithApple: () => null
+  signInWithApple: () => null,
+  signOut: () => null,
+  userStorageLoading: false
 }
 
 export const AuthContext = createContext<AuthContextData>(
@@ -97,11 +101,14 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       })
 
       if (credential) {
+        const name = credential.fullName!.givenName!
+        const photo = `https://ui-avatars.com/api/?name=${name}&lenght=1`
+
         const userLogged = {
           id: String(credential.user),
           email: credential.email!,
           name: credential.fullName!.givenName!,
-          photo: undefined
+          photo
         }
 
         setUser(userLogged)
@@ -110,6 +117,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     } catch (error) {
       throw new Error(error)
     }
+  }
+
+  const signOut = async () => {
+    setUser({} as UserProps)
+    await AsyncStorage.removeItem(userStorageKey)
   }
 
   useEffect(() => {
@@ -128,7 +140,15 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle, signInWithApple }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        signInWithGoogle,
+        signInWithApple,
+        signOut,
+        userStorageLoading
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )

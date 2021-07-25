@@ -27,6 +27,7 @@ type HighlightData = {
 }
 
 import * as S from './styles'
+import { useAuth } from '../../hooks/use-auth'
 
 export const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -36,6 +37,7 @@ export const Dashboard = () => {
   )
 
   const theme = useTheme()
+  const { signOut, user } = useAuth()
 
   const getLastTransactionDate = (
     collection: DataListProps[],
@@ -97,6 +99,7 @@ export const Dashboard = () => {
       transactionsLoaded,
       'positive'
     )
+
     const lastTransactionExpensives = getLastTransactionDate(
       transactionsLoaded,
       'negative'
@@ -139,64 +142,60 @@ export const Dashboard = () => {
           <ActivityIndicator color={theme.colors.primary} size="large" />
         </S.LoadContainer>
       ) : (
-        <>
-          <S.Header>
-            <S.UserWrapper>
-              <S.UserInfo>
-                <S.Photo
-                  source={{
-                    uri: 'https://avatars.githubusercontent.com/u/15898709?v=4'
-                  }}
-                />
-                <S.User>
-                  <S.UserGreeting>Olá,</S.UserGreeting>
-                  <S.UserName>Morpa</S.UserName>
-                </S.User>
-              </S.UserInfo>
+          <>
+            <S.Header>
+              <S.UserWrapper>
+                <S.UserInfo>
+                  <S.Photo
+                    source={{
+                      uri: user.photo
+                    }}
+                  />
+                  <S.User>
+                    <S.UserGreeting>Olá,</S.UserGreeting>
+                    <S.UserName>{user.name}</S.UserName>
+                  </S.User>
+                </S.UserInfo>
 
-              <S.LogoutButton
-                onPress={() => {
-                  console.log('object')
-                }}
-              >
-                <S.Icon name="power" />
-              </S.LogoutButton>
-            </S.UserWrapper>
-          </S.Header>
-          <S.HighlightCards>
-            <HighlightCard
-              cardType="movements"
-              iconType="up"
-              titlle="Entradas"
-              amount={highlightData.entries.amout}
-              lastTransaction={highlightData.entries.lastTransaction}
-            />
-            <HighlightCard
-              cardType="movements"
-              iconType="down"
-              titlle="Saídas"
-              amount={highlightData.expensives.amout}
-              lastTransaction={highlightData.expensives.lastTransaction}
-            />
-            <HighlightCard
-              cardType="total"
-              iconType="total"
-              titlle="Total"
-              amount={highlightData.total.amout}
-              lastTransaction={highlightData.total.lastTransaction}
-            />
-          </S.HighlightCards>
-          <S.Transactions>
-            <S.Title>Listagem</S.Title>
+                <S.LogoutButton onPress={signOut}>
+                  <S.Icon name="power" />
+                </S.LogoutButton>
+              </S.UserWrapper>
+            </S.Header>
+            <S.HighlightCards>
+              <HighlightCard
+                cardType="movements"
+                iconType="up"
+                titlle="Entradas"
+                amount={highlightData.entries.amout}
+                lastTransaction={highlightData.entries.lastTransaction}
+              />
+              <HighlightCard
+                cardType="movements"
+                iconType="down"
+                titlle="Saídas"
+                amount={highlightData.expensives.amout}
+                lastTransaction={highlightData.expensives.lastTransaction}
+              />
+              <HighlightCard
+                cardType="total"
+                iconType="total"
+                titlle="Total"
+                amount={highlightData.total.amout}
+                lastTransaction={highlightData.total.lastTransaction}
+              />
+            </S.HighlightCards>
+            <S.Transactions>
+              <S.Title>Listagem</S.Title>
 
-            <S.TransactionsList
-              data={transactions}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => <TransactionCard data={item} />}
-            />
-          </S.Transactions>
-        </>
-      )}
+              <S.TransactionsList
+                data={transactions}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => <TransactionCard data={item} />}
+              />
+            </S.Transactions>
+          </>
+        )}
     </S.Container>
   )
 }
