@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ActivityIndicator, Alert } from 'react-native'
+import { ActivityIndicator, Alert, Platform } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { useTheme } from 'styled-components'
 
@@ -24,7 +24,6 @@ export const SignIn = () => {
     } catch (error) {
       console.error(error)
       Alert.alert('Não foi possível conectar com o Google')
-    } finally {
       setIsLoading(false)
     }
   }
@@ -36,7 +35,6 @@ export const SignIn = () => {
     } catch (error) {
       console.log(error)
       Alert.alert('Não foi possível conectar a conta Apple')
-    } finally {
       setIsLoading(false)
     }
   }
@@ -63,11 +61,13 @@ export const SignIn = () => {
             svg={GoogleSVG}
             onPress={handleSignInWithGoogle}
           />
-          <SocialButton
-            title="Entrar com Apple"
-            svg={AppleSVG}
-            onPress={handleSignInWithApple}
-          />
+          {Platform.OS === 'ios' && (
+            <SocialButton
+              title="Entrar com Apple"
+              svg={AppleSVG}
+              onPress={handleSignInWithApple}
+            />
+          )}
         </S.FooterWrapper>
 
         {isLoading && (

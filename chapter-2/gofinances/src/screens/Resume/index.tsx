@@ -7,13 +7,14 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import { VictoryPie } from 'victory-native'
 import { addMonths, subMonths, format } from 'date-fns'
 import { pt } from 'date-fns/locale'
+import { useFocusEffect } from '@react-navigation/native'
 
 import { HistoryCard } from '../../components/HistoryCard'
 import { categories } from '../../utils/categories'
 import { formatValue } from '../../utils/format-values'
+import { useAuth } from '../../hooks/use-auth'
 
 import * as S from './styles'
-import { useFocusEffect } from '@react-navigation/native'
 
 type TransactionData = {
   amountType: 'positive' | 'negative'
@@ -37,6 +38,7 @@ export const Resume = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([])
   const [selectedDate, setSelectedDate] = useState(new Date())
+  const { signOut, user } = useAuth()
 
   const handleDateChange = (action: 'previous' | 'next') => {
     if (action === 'next') {
@@ -49,7 +51,7 @@ export const Resume = () => {
   const loadData = useCallback(async () => {
     setIsLoading(true)
 
-    const dataKey = '@gofinances:transactions'
+    const dataKey = `@gofinances:transactions_user:${user.id}`
     const response = await AsyncStorage.getItem(dataKey)
     const responseFormatted = response ? JSON.parse(response) : []
 

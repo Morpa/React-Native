@@ -12,6 +12,7 @@ import { InputForm } from '../../components/InputForm'
 import { TransactionTypeButton } from '../../components/TransactionTypeButton'
 import { CategorySelectButton } from '../../components/CategorySelectButton'
 import { CategorySelect } from '../CategorySelect'
+import { useAuth } from '../../hooks/use-auth'
 
 type FormData = {
   name: string
@@ -39,6 +40,8 @@ export const Register = () => {
   })
 
   const navigation = useNavigation()
+
+  const { user } = useAuth()
 
   const [category, setCategory] = useState({
     key: 'category',
@@ -77,7 +80,7 @@ export const Register = () => {
     }
 
     try {
-      const dataKey = '@gofinances:transactions'
+      const dataKey = `@gofinances:transactions_user:${user.id}`
 
       const data = await AsyncStorage.getItem(dataKey)
 
