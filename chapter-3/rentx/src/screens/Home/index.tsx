@@ -2,10 +2,8 @@ import React from 'react'
 
 import * as S from './styles'
 
-export const {{pascalCase name}} = () => {
-  return (
+export const Home = () => (
   <S.Container>
-    {pascalCase name}
+    <S.Title>Home</S.Title>
   </S.Container>
-  )
-}
+)
