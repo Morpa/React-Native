@@ -20,4 +20,4 @@ export default {
     secondary500: ' Archivo_500Medium',
     secondary600: 'Archivo_600SemiBold'
   }
-}
+} as const

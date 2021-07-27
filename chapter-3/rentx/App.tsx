@@ -15,7 +15,7 @@ import {
 import { Home } from './src/screens/Home'
 import theme from './src/styles/theme'
 
-export const App = () => {
+const App = () => {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
@@ -34,3 +34,5 @@ export const App = () => {
     </ThemeProvider>
   )
 }
+
+export default App
