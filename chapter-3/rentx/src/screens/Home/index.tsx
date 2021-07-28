@@ -9,14 +9,16 @@ import * as S from './styles'
 
 export const Home = () => {
   const carData = {
-    brand: 'Audi',
-    name: 'R8 Spyder',
-    rent: {
+    carDetails: {
+      brand: 'Audi',
+      name: 'R8 Spyder',
+      thumbnail:
+        'https://www.real-luxury.com/media/tz_portfolio_plus/article/cache/noleggio-audi-r8-spyder-35-1_xl.png'
+    },
+    rentDetails: {
       period: 'Ao dia',
       price: 800
-    },
-    thumbnail:
-      'https://www.real-luxury.com/media/tz_portfolio_plus/article/cache/noleggio-audi-r8-spyder-35-1_xl.png'
+    }
   }
 
   return (
@@ -32,17 +34,16 @@ export const Home = () => {
           <S.TotalCars>Total de 12 carros</S.TotalCars>
         </S.HeaderContent>
       </S.Header>
-      <CarCard
-        brand={carData.brand}
-        name={carData.name}
-        rent={carData.rent}
-        thumbnail={carData.thumbnail}
-      />
-      <CarCard
-        brand={carData.brand}
-        name={carData.name}
-        rent={carData.rent}
-        thumbnail={carData.thumbnail}
+
+      <S.CarList
+        data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+        keyExtractor={(item) => String(item)}
+        renderItem={({ item }) => (
+          <CarCard
+            carDetails={carData.carDetails}
+            rentDetails={carData.rentDetails}
+          />
+        )}
       />
     </S.Container>
   )

@@ -4,27 +4,33 @@ import GasolineFuel from '../../assets/gasoline.svg'
 
 import * as S from './styles'
 
-type CarCardProps = {
+type CarProps = {
   brand: string
   name: string
-  rent: {
-    period: string
-    price: number
-  }
   thumbnail: string
 }
 
-export const CarCard = ({ brand, name, rent, thumbnail }: CarCardProps) => {
+type RentProps = {
+  period: string
+  price: number
+}
+
+type CarCardProps = {
+  carDetails: CarProps
+  rentDetails: RentProps
+}
+
+export const CarCard = ({ carDetails, rentDetails }: CarCardProps) => {
   return (
     <S.Container>
       <S.Details>
-        <S.Brand>{brand}</S.Brand>
-        <S.Name>{name}</S.Name>
+        <S.Brand>{carDetails.brand}</S.Brand>
+        <S.Name>{carDetails.name}</S.Name>
 
         <S.About>
           <S.Rent>
-            <S.Period>{rent.period}</S.Period>
-            <S.Price>{`${rent.price} €`}</S.Price>
+            <S.Period>{rentDetails.period}</S.Period>
+            <S.Price>{`${rentDetails.price} €`}</S.Price>
           </S.Rent>
 
           <S.Type>
@@ -33,7 +39,10 @@ export const CarCard = ({ brand, name, rent, thumbnail }: CarCardProps) => {
         </S.About>
       </S.Details>
 
-      <S.CardImage source={{ uri: thumbnail }} resizeMode="contain" />
+      <S.CardImage
+        source={{ uri: carDetails.thumbnail }}
+        resizeMode="contain"
+      />
     </S.Container>
   )
 }
