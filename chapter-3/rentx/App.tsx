@@ -12,7 +12,7 @@ import {
   Archivo_600SemiBold
 } from '@expo-google-fonts/archivo'
 
-import { CarDetails } from './src/screens/CarDetails'
+import { SchedulingDetails } from './src/screens/SchedulingDetails'
 import theme from './src/styles/theme'
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CarDetails />
+      <SchedulingDetails />
     </ThemeProvider>
   )
 }
