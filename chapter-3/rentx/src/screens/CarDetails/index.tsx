@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 import { BackButton } from '../../components/BackButton'
 import { ImageSlider } from '../../components/ImageSlider'
@@ -15,6 +16,11 @@ import peopleSvg from '../../assets/people.svg'
 import * as S from './styles'
 
 export const CarDetails = () => {
+  const navigation = useNavigation()
+
+  const handleConfirmRental = () => {
+    navigation.navigate('Scheduling')
+  }
   return (
     <S.Container>
       <S.Header>
@@ -59,7 +65,10 @@ export const CarDetails = () => {
       </S.Content>
 
       <S.Footer>
-        <Button title="Confirmar" />
+        <Button
+          title="Escolher o período do aluguel"
+          onPress={handleConfirmRental}
+        />
       </S.Footer>
     </S.Container>
   )

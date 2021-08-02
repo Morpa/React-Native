@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { StatusBar } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 
@@ -8,6 +9,8 @@ import { CarCard } from '../../components/CarCard'
 import * as S from './styles'
 
 export const Home = () => {
+  const navigation = useNavigation()
+
   const carData = {
     carDetails: {
       brand: 'Audi',
@@ -19,6 +22,10 @@ export const Home = () => {
       period: 'Ao dia',
       price: 800
     }
+  }
+
+  const handleCarDetails = () => {
+    navigation.navigate('CarDetails')
   }
 
   return (
@@ -42,6 +49,7 @@ export const Home = () => {
           <CarCard
             carDetails={carData.carDetails}
             rentDetails={carData.rentDetails}
+            onPress={handleCarDetails}
           />
         )}
       />

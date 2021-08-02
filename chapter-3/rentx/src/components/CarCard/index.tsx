@@ -1,4 +1,5 @@
 import React from 'react'
+import { RectButtonProps } from 'react-native-gesture-handler'
 
 import GasolineFuel from '../../assets/gasoline.svg'
 
@@ -18,11 +19,15 @@ type RentProps = {
 type CarCardProps = {
   carDetails: CarProps
   rentDetails: RentProps
-}
+} & RectButtonProps
 
-export const CarCard = ({ carDetails, rentDetails }: CarCardProps) => {
+export const CarCard = ({
+  carDetails,
+  rentDetails,
+  ...props
+}: CarCardProps) => {
   return (
-    <S.Container>
+    <S.Container {...props}>
       <S.Details>
         <S.Brand>{carDetails.brand}</S.Brand>
         <S.Name>{carDetails.name}</S.Name>
