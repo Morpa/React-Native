@@ -6,6 +6,7 @@ import GasolineFuel from '../../assets/gasoline.svg'
 import * as S from './styles'
 
 type CarProps = {
+  id: string
   brand: string
   name: string
   thumbnail: string
@@ -16,7 +17,7 @@ type RentProps = {
   price: number
 }
 
-type CarCardProps = {
+export type CarCardProps = {
   carDetails: CarProps
   rentDetails: RentProps
 } & RectButtonProps
