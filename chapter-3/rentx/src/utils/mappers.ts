@@ -7,7 +7,8 @@ export const carCardMapper = (cars: CarProps[]) => {
       id: cars.id,
       brand: cars.brand,
       name: cars.name,
-      thumbnail: cars.thumbnail
+      thumbnail: cars.thumbnail,
+      fuelType: cars.fuel_type
     },
     rentDetails: {
       period: cars.rent.period,

@@ -1,7 +1,7 @@
 import React from 'react'
 import { RectButtonProps } from 'react-native-gesture-handler'
 
-import GasolineFuel from '../../assets/gasoline.svg'
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon'
 
 import * as S from './styles'
 
@@ -10,6 +10,7 @@ type CarProps = {
   brand: string
   name: string
   thumbnail: string
+  fuelType: string
 }
 
 type RentProps = {
@@ -27,6 +28,8 @@ export const CarCard = ({
   rentDetails,
   ...props
 }: CarCardProps) => {
+  const MotorIcon = getAccessoryIcon(carDetails.fuelType)
+
   return (
     <S.Container {...props}>
       <S.Details>
@@ -40,7 +43,7 @@ export const CarCard = ({
           </S.Rent>
 
           <S.Type>
-            <GasolineFuel />
+            <MotorIcon />
           </S.Type>
         </S.About>
       </S.Details>

@@ -27,21 +27,19 @@ export type CarProps = {
     type: string
     name: string
   }[]
-  photos: {
-    id: string
-    photo: string
-  }[]
+  photos: string[]
 }
 
-export type CarStateProps = Pick<CarCardProps, 'carDetails' | 'rentDetails'>
+export type CarStateProps = Pick<CarCardProps, 'carDetails' | 'rentDetails'> &
+  CarProps
 
 export const Home = () => {
   const [cars, setCars] = useState<CarStateProps[]>([])
   const [loading, setLoading] = useState(true)
   const navigation = useNavigation()
 
-  const handleCarDetails = () => {
-    navigation.navigate('CarDetails')
+  const handleCarDetails = (car: CarStateProps) => {
+    navigation.navigate('CarDetails', { car })
   }
 
   const fetchCars = async () => {
@@ -86,7 +84,7 @@ export const Home = () => {
             <CarCard
               carDetails={item.carDetails}
               rentDetails={item.rentDetails}
-              onPress={handleCarDetails}
+              onPress={() => handleCarDetails(item)}
             />
           )}
         />
