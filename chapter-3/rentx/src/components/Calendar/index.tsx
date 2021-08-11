@@ -1,17 +1,40 @@
 import React from 'react'
 import {
   Calendar as CustomCalendar,
-  LocaleConfig
+  LocaleConfig,
+  DateCallbackHandler
 } from 'react-native-calendars'
 import { Feather } from '@expo/vector-icons'
 import { useTheme } from 'styled-components'
 
-import { ptBR } from './localeConfig'
+import { ptBR } from '../../utils/localeConfig'
 
 LocaleConfig.locales['pt-br'] = ptBR
 LocaleConfig.defaultLocale = 'pt-br'
 
-export const Calendar = () => {
+type DayProps = {
+  dateString: string
+  day: number
+  month: number
+  year: number
+  timestamp: number
+}
+
+type MarkedDateProps = {
+  [date: string]: {
+    color: string
+    textColor: string
+    disabled?: boolean
+    disableTouchEvent?: boolean
+  }
+}
+
+type CalendarProps = {
+  markedDates: MarkedDateProps
+  onDayPress: DateCallbackHandler
+}
+
+const Calendar = ({ markedDates, onDayPress }: CalendarProps) => {
   const theme = useTheme()
 
   return (
@@ -44,6 +67,10 @@ export const Calendar = () => {
       firstDay={1}
       minDate={new Date()}
       markingType="period"
+      markedDates={markedDates}
+      onDayPress={onDayPress}
     />
   )
 }
+
+export { Calendar, MarkedDateProps, DayProps }

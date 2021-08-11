@@ -26,7 +26,7 @@ export const CarDetails = () => {
   }
 
   const handleConfirmRental = () => {
-    navigation.navigate('Scheduling')
+    navigation.navigate('Scheduling', { car })
   }
   return (
     <S.Container>
